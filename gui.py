@@ -1,13 +1,16 @@
 import tkinter as tk
 from fizzbuzz import calculate_string
 
-
 def show():
     try:
         num = int(entryBox.get())
-        result_label.config(text=calculate_string(num))
+        msg = calculate_string(num)
+        if msg is None:
+            msg = "Value out of bounds"
     except ValueError:
-        result_label.config(text="Please enter a valid number")
+        msg = "Please enter a valid number"
+    
+    result_label.config(text=msg)
 
 root = tk.Tk()
 root.title("FizzBuzz - Counting Game")

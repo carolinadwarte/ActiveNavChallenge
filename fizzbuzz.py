@@ -2,8 +2,13 @@ def calculate_string(num: int):
     """ Return input if not modication would be made, returns string otherwise """
     multipleOf3 = num % 3 == 0
     multipleOf5 = num % 5 == 0
+    range = (0,100)
+    # check if num is between 0 - 100
+    if num < range[0] or num > range[1]:
+        return None
+    
     match num:
-        #the first condition checks if num is multiple of both 3 and 5 before checking individually
+    #the first condition checks if num is multiple of both 3 and 5 before checking individually
         case _ if multipleOf3 and multipleOf5:
             return "FizzBuzz"
         case _ if multipleOf3:

@@ -1,25 +1,36 @@
-from time import gmtime
+import logging
 import tkinter as tk
-from BangWhizGame import BangWhizGame
 from CountingGame import CountingGameBase
-from FizzBuzzGame import FizzBuzzGame
 
-class Gui():
+logging.basicConfig(level=logging.DEBUG)
+
+
+class Gui:
     ui = tk.Tk()
+    log = logging.getLogger(__name__)
 
     def __init__(self, gameList: list[CountingGameBase]):
         self.game = gameList[0]
         self.gameList = gameList
-        self.ui.title("FizzBuzz - Counting Games")
-        #window size
+        self.ui.title("Counting Games")
+
+        # current game
+        self.currentGameName = tk.Label(self.ui, font=("Arial", 20))
+        self.currentGameName.pack()
+
+        # window size
         self.ui.geometry("400x200")
         # Menu
         menu = tk.Menu(self.ui)
         self.ui.config(menu=menu)
         filemenu = tk.Menu(menu)
         menu.add_cascade(label="Game", menu=filemenu)
+
         for game in gameList:
-            filemenu.add_command(label=game.getName(), command=lambda: self.changeGame(game))
+            filemenu.add_command(
+                label=game.getName(), command=lambda game=game: self.changeGame(game)
+            )
+
         filemenu.add_separator()
         filemenu.add_command(label="Exit", command=self.ui.quit)
         # prompting the user for input
@@ -29,7 +40,9 @@ class Gui():
         self.entryBox.pack()
 
         # Button to trigger FizzBuzz calculation
-        checkButton = tk.Button(self.ui, text="Check", command=self.show, font=("Arial", 20))
+        checkButton = tk.Button(
+            self.ui, text="Check", command=self.show, font=("Arial", 20)
+        )
         checkButton.pack()
 
         # Static "Result:" label, positioned on the left
@@ -44,7 +57,9 @@ class Gui():
         self.result_label.pack(side=tk.LEFT)
 
     def changeGame(self, game: CountingGameBase):
+        self.log.debug(f"Setting game to: {game.getName()}")
         self.game = game
+        self.currentGameName.config(text=self.game.getName())
 
     def show(self):
         try:
@@ -54,10 +69,8 @@ class Gui():
                 msg = "Value out of bounds"
         except ValueError:
             msg = "Please enter a valid number"
-        
+
         self.result_label.config(text=msg)
 
     def uiStructure(self):
         self.ui.mainloop()
-
-    

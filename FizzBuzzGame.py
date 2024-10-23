@@ -2,16 +2,20 @@ from CountingGame import CountingGameBase
 
 
 class FizzBuzzGame(CountingGameBase):
-
     def getName(self) -> str:
         return "FizzBuzz"
 
     def rangeCheck(self, num: int):
-        range = (0, 100)
-        # check if num is between 0 - 100
-        if num < range[0] or num > range[1]:
-            return False
-        return True
+        """_summary_
+        Checks if the given number is in range.
+        Args:
+            num (int): the number to be checked
+
+        Returns:
+            bool: True if in range, False otherwise
+        """
+        range = (1, 100)
+        return not (num < range[0] or num > range[1])
 
     def calculate_string(self, num: int):
         """Return input if no modication would be made, returns string otherwise"""

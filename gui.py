@@ -2,8 +2,6 @@ import logging
 import tkinter as tk
 from CountingGame import CountingGameBase
 
-logging.basicConfig(level=logging.DEBUG)
-
 
 class Gui:
     ui = tk.Tk()
@@ -72,5 +70,5 @@ class Gui:
 
         self.result_label.config(text=msg)
 
-    def uiStructure(self):
+    def start(self):
         self.ui.mainloop()

@@ -1,10 +1,9 @@
 from CountingGame import CountingGameBase
 
-
-class FizzBuzzGame(CountingGameBase):
+class BangWhizGame(CountingGameBase):
 
     def getName(self) -> str:
-        return "FizzBuzz"
+        return "BangWhiz"
 
     def rangeCheck(self,num: int):
         range = (0,100)
@@ -20,19 +19,17 @@ class FizzBuzzGame(CountingGameBase):
             return None
 
         #conditions for x to be multiple of y: y/x=0 
-        multipleOf3 = num % 3 == 0
-        multipleOf5 = num % 5 == 0
+        multipleOf4 = num % 4 == 0
+        multipleOf6 = num % 6 == 0
 
         match num:
         #the first condition checks if num is multiple of both 3 and 5 before checking individually
-            case _ if multipleOf3 and multipleOf5:
-                return "FizzBuzz"
-            case _ if multipleOf3:
-                return "Fizz"
-            case _ if multipleOf5:
-                return "Buzz" 
+            case _ if multipleOf4 and multipleOf6:
+                return "BangWhiz"
+            case _ if multipleOf4:
+                return "Bang"
+            case _ if multipleOf6:
+                return "Whiz" 
             case _:
                 return num
     
-
-

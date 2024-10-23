@@ -1,14 +1,27 @@
+from time import gmtime
 import tkinter as tk
+from BangWhizGame import BangWhizGame
 from CountingGame import CountingGameBase
+from FizzBuzzGame import FizzBuzzGame
 
 class Gui():
     ui = tk.Tk()
 
-    def __init__(self, game: CountingGameBase):
-        self.game = game
-        self.ui.title("FizzBuzz - Counting Game")
+    def __init__(self, gameList: list[CountingGameBase]):
+        self.game = gameList[0]
+        self.gameList = gameList
+        self.ui.title("FizzBuzz - Counting Games")
         #window size
         self.ui.geometry("400x200")
+        # Menu
+        menu = tk.Menu(self.ui)
+        self.ui.config(menu=menu)
+        filemenu = tk.Menu(menu)
+        menu.add_cascade(label="Game", menu=filemenu)
+        for game in gameList:
+            filemenu.add_command(label=game.getName(), command=lambda: self.changeGame(game))
+        filemenu.add_separator()
+        filemenu.add_command(label="Exit", command=self.ui.quit)
         # prompting the user for input
         inputPrompt = tk.Label(self.ui, text="Your Input:", font=("Arial", 20))
         inputPrompt.pack()
@@ -16,7 +29,7 @@ class Gui():
         self.entryBox.pack()
 
         # Button to trigger FizzBuzz calculation
-        checkButton = tk.Button(self.ui, text="Check FizzBuzz", command=self.show, font=("Arial", 20))
+        checkButton = tk.Button(self.ui, text="Check", command=self.show, font=("Arial", 20))
         checkButton.pack()
 
         # Static "Result:" label, positioned on the left
@@ -29,6 +42,9 @@ class Gui():
         # Label to display the result
         self.result_label = tk.Label(result_label_frame, text="", font=("Arial", 20))
         self.result_label.pack(side=tk.LEFT)
+
+    def changeGame(self, game: CountingGameBase):
+        self.game = game
 
     def show(self):
         try:

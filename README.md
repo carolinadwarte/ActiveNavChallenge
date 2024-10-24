@@ -19,6 +19,9 @@ This is a program that runs one of two counting games. It can be interacted with
 Required software:
 - [Python 3.11](https://www.python.org/downloads/) or later
 - Python Packages: 
+    Before installing the Python packages, a virtual environment needs to be set up. To do this, run:  
+        `python -m venv venv`  
+        `source venv/bin/activate`  
     - `tkinter` for the gui
         - Install using command: `python3 -m pip install tkinter`
     - `pytest` for testing

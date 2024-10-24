@@ -63,8 +63,6 @@ class Gui:
         try:
             num = int(self.entryBox.get())
             msg = self.game.calculate_string(num)
-            if msg is None:
-                msg = "Value out of bounds"
         except ValueError:
             msg = "Please enter a valid number"
 

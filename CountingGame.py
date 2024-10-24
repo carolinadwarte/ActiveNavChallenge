@@ -16,14 +16,10 @@ class CountingGameBase(ABC):
         pass
 
     @abstractmethod
-    def calculate_string(self, num: int) -> str | int | None:
+    def calculate_string(self, num: int) -> str | int:
         """_summary_
 
         Args:
             num (int): the number to be 'played'
         """
-        pass
-
-    @abstractmethod
-    def rangeCheck(self, num: int) -> bool:
         pass

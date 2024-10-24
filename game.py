@@ -26,10 +26,19 @@ if __name__ == "__main__":
     )
     parser.add_argument("-g", "--game", help="Specify the game to be played")
     parser.add_argument("--ui", help="Open UI", action="store_true")
+    parser.add_argument(
+        "-r",
+        "--range",
+        help="Specify a range of numbers (start end)",
+        nargs=2,
+        type=int,
+        default=[0, 100],
+    )
 
     args = parser.parse_args()
-
-    if args.list:
+    if args.range[0] >= args.range[1]:
+        print("Invalid range: Start of range must be less than end.")
+    elif args.list:
         print(f"Available games: {' '.join(game.getName() for game in game_list)}")
     elif args.ui:
         # Start the UI with the given games
@@ -41,5 +50,5 @@ if __name__ == "__main__":
             print(f"Couldn't find game with name: {args.game}")
         else:
             print(f"Running {args.game}...")
-            for i in range(1, 101):
+            for i in range(args.range[0], args.range[1] + 1):
                 print(game.calculate_string(i))

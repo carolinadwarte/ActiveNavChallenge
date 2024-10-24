@@ -13,7 +13,7 @@ class Gui:
         self.ui.title("Counting Games")
 
         # current game
-        self.currentGameName = tk.Label(self.ui, font=("Arial", 20))
+        self.currentGameName = tk.Label(self.ui, text="FizzBuzz", font=("Arial", 20))
         self.currentGameName.pack()
 
         # window size

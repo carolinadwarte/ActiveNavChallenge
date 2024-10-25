@@ -1,3 +1,5 @@
+# An example alternative delivery method for a counting game.
+# Presents a UI for a user to input a single number.
 import logging
 import tkinter as tk
 from CountingGame import CountingGameBase
@@ -8,12 +10,11 @@ class Gui:
     log = logging.getLogger(__name__)
 
     def __init__(self, gameList: list[CountingGameBase]):
-        self.game = gameList[0]
         self.gameList = gameList
         self.ui.title("Counting Games")
 
         # current game
-        self.currentGameName = tk.Label(self.ui, text="FizzBuzz", font=("Arial", 20))
+        self.currentGameName = tk.Label(self.ui, text="", font=("Arial", 20))
         self.currentGameName.pack()
 
         # window size
@@ -37,7 +38,7 @@ class Gui:
         self.entryBox = tk.Entry(self.ui)
         self.entryBox.pack()
 
-        # Button to trigger FizzBuzz calculation
+        # Button to trigger game calculation
         checkButton = tk.Button(
             self.ui, text="Check", command=self.show, font=("Arial", 20)
         )
@@ -54,12 +55,23 @@ class Gui:
         self.result_label = tk.Label(result_label_frame, text="", font=("Arial", 20))
         self.result_label.pack(side=tk.LEFT)
 
+        # Set the current game to the first in the list
+        self.changeGame(gameList[0])
+
     def changeGame(self, game: CountingGameBase):
+        """_summary_
+            Changes the game being played buy the GUI.
+        Args:
+            game (CountingGameBase): game to be played.
+        """
         self.log.debug(f"Setting game to: {game.getName()}")
         self.game = game
         self.currentGameName.config(text=self.game.getName())
 
     def show(self):
+        """_summary_
+        Reads the number from the entry box and calculates the result from the game.
+        """
         try:
             num = int(self.entryBox.get())
             msg = self.game.calculate_string(num)
@@ -69,4 +81,7 @@ class Gui:
         self.result_label.config(text=msg)
 
     def start(self):
+        """_summary_
+        Runs the GUI indefinitely.
+        """
         self.ui.mainloop()

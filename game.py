@@ -1,3 +1,4 @@
+# Entry point for the program, parses any arguments passed via the command line
 from logging import basicConfig, DEBUG
 from BangWhizGame import BangWhizGame
 from CountingGame import CountingGameBase
@@ -9,30 +10,38 @@ basicConfig(level=DEBUG)
 
 
 def find_game(name: str, game_list: list[CountingGameBase]):
+    """_summary_
+        Finds a game with a given name in the game list.
+    Args:
+        name (str): name of the game to find
+        game_list (list[CountingGameBase]): list of games to search
+
+    Returns:
+        A game if found a match for the name else None.
+    """
     for game in game_list:
         if game.getName() == name:
             return game
 
 
 if __name__ == "__main__":
-    """Code inside this closure will only run if this file is called directly"""
-
     # Add any new counting games here
     game_list: list[CountingGameBase] = [FizzBuzzGame(), BangWhizGame()]
 
+    # Command line argument descriptions
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "-l", "--list", help="List available games", action="store_true"
     )
-    parser.add_argument("-g", "--game", help="Specify the game to be played")
     parser.add_argument("--ui", help="Open UI", action="store_true")
+    parser.add_argument("-g", "--game", help="Specify the game to be played")
     parser.add_argument(
         "-r",
         "--range",
         help="Specify a range of numbers (start end)",
         nargs=2,
         type=int,
-        default=[0, 100],
+        default=[1, 100],
     )
 
     args = parser.parse_args()

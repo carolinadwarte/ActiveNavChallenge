@@ -1,15 +1,13 @@
+# A class to represent the BangWhiz game.
 from CountingGame import CountingGameBase
 
 
 class BangWhizGame(CountingGameBase):
-
     def getName(self) -> str:
         return "BangWhiz"
 
     def calculate_string(self, num: int):
-        """Return input if no modication would be made, returns string otherwise"""
-
-        # conditions for x to be multiple of y: y/x=0
+        # conditions for x to be multiple of y: y%x=0
         multipleOf4 = num % 4 == 0
         multipleOf6 = num % 6 == 0
 

@@ -1,3 +1,4 @@
+# A class to represent the FizzBuzz game.
 from CountingGame import CountingGameBase
 
 
@@ -6,9 +7,7 @@ class FizzBuzzGame(CountingGameBase):
         return "FizzBuzz"
 
     def calculate_string(self, num: int):
-        """Return input if no modication would be made, returns string otherwise"""
-
-        # conditions for x to be multiple of y: y/x=0
+        # conditions for x to be multiple of y: y%x=0
         multipleOf3 = num % 3 == 0
         multipleOf5 = num % 5 == 0
 
